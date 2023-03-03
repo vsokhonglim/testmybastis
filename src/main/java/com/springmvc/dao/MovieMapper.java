@@ -35,4 +35,12 @@ public class MovieMapper {
 		session.close();
 		
 	}
+	
+	public void deleteMovie(int movieId){
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		session.delete("deletemovie", movieId);
+		
+		session.commit();
+		session.close();
+	}
 }

@@ -17,15 +17,15 @@
 		resultMap="movielist">
 		SELECT * FROM movie
 	</select>
-	
-	<insert id="addmovie" parameterType="movies" keyProperty="id" useGeneratedKeys="true">
-	
-	
+
+	<insert id="addmovie" parameterType="movies" keyProperty="id"
+		useGeneratedKeys="true">
 		INSERT INTO movie(movie_title, movie_description, movie_releasedate)
 		VALUES(#{title}, #{description}, #{releasedate})
-		
-		
-		
 	</insert>
+	
+	<delete id="deletemovie" parameterType="int">
+		DELETE FROM movie WHERE movie_id = #{movieId}
+	</delete>
 
 </mapper>
