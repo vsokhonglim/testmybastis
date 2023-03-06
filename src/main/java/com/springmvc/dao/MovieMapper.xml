@@ -15,7 +15,7 @@
 
 	<select id="getListMovie" resultType="movies"
 		resultMap="movielist">
-		SELECT * FROM movie
+		SELECT * FROM movie LIMIT 10 OFFSET 0
 	</select>
 	<select id="getMoviebyId" resultType="movies"
 		parameterType="int" resultMap="movielist">

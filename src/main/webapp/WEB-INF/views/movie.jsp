@@ -24,8 +24,14 @@
 
 		<input type="button" value="Add movie"
 			onclick="window.location.href='addmovie'; return false;" />
-			<form action="filter" method="GET">
-		<div class="date-filter-container">
+			
+			<div class="search-container">
+			<input type="text" placeholder="Movie titile or description"/>
+			</div>
+			
+			<form action="filter" method="GET">			
+			<div class="date-filter-container">
+			
 			<span>From:</span>
 			 <input type="date" name="fromdate" required="required"
 					value="<%=request.getParameter("fromdate")%>" />
@@ -34,6 +40,7 @@
 					value="<%=request.getParameter("todate")%>" />
 			<input	type="submit" value="Filter" />
 			</div>
+			
 		</form>
 		
 
@@ -66,10 +73,25 @@
 				</tr>
 
 			</c:forEach>
-
-
+			
 		</table>
+
+		
+
+
+
 	</div>
+	
+	<div class="pagination">
+			<a href="#">&laquo;</a>
+			<a href="#" class="active">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#">5</a>
+			<a href="#">6</a>
+			<a href="#">&raquo;</a>
+		</div>
 </body>
 
 

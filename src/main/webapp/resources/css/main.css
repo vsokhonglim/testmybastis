@@ -2,6 +2,7 @@
 
 .tableWrapper {
 	width: 80vw; 
+	height:100%;
 	margin:auto;
 }
 
@@ -42,4 +43,35 @@ th:nth-child(4) {
 	gap:15px;
 	margin-bottom: 10px;
 }
+.search-container{
+	display:flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+.pagination{
+	margin-top:8px;
+	display:flex;
+	justify-content: center;
+	gap:5px;
+}
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .5s;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.pagination a.active {
+  background-color: #676767;
+  color: white;
+  border: 1px solid #676767;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
 

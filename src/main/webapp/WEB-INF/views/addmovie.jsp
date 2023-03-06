@@ -8,6 +8,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add new movie</title>
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/addmovie.css" />
 </head>
 <body>
 <div id="container">
@@ -25,7 +27,7 @@
 				
 					<tr>
 						<td><label>Description</label></td>
-						<td><form:input path="description" /></td>
+						<td><form:textarea path="description" maxlength="199" cols="40" rows="5"/></td>
 					</tr>
 
 					<tr>
