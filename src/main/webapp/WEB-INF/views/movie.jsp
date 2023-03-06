@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,13 +10,7 @@
 <meta charset="ISO-8859-1">
 
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css"
-	rel="stylesheet" />
+
 
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/main.css" />
@@ -30,9 +24,18 @@
 
 		<input type="button" value="Add movie"
 			onclick="window.location.href='addmovie'; return false;" />
-		<div id="picker-container">
-			<input type="text" id="datepicker" />
-		</div>
+			<form action="filter" method="GET">
+		<div class="date-filter-container">
+			<span>From:</span>
+			 <input type="date" name="fromdate" required="required"
+					value="<%=request.getParameter("fromdate")%>" />
+			<span>to:</span> 
+			<input type="date" name="todate" required="required"
+					value="<%=request.getParameter("todate")%>" />
+			<input	type="submit" value="Filter" />
+			</div>
+		</form>
+		
 
 		<table class="table">
 			<th>Title</th>
@@ -68,17 +71,7 @@
 		</table>
 	</div>
 </body>
-<script type="text/javascript">
-	$("#datepicker").datepicker({
-		container : "#picker-container",
-		zIndexOffset : 20 ,
-		format : "yyyy",
-		viewMode : "years",
-		minViewMode : "years",
-		autoclose : true
 
-	});
-</script>
 
 
 </html>

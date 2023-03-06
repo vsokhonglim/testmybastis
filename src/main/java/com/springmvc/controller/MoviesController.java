@@ -1,6 +1,10 @@
 package com.springmvc.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,6 +61,14 @@ public class MoviesController {
 
 		model.addAttribute("newmovie", movieService.getMoviebyId(movieId));
 		return "addmovie";
+	}
+	
+	@RequestMapping("/filter")
+	public String filterMovielist(@RequestParam(value="fromdate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date fromDate, @RequestParam(value="todate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date toDate,Model model) {
+		
+		model.addAttribute("Movielist", movieService.filterMovielist(fromDate,toDate));
+		return "movie";
+
 	}
 
 }

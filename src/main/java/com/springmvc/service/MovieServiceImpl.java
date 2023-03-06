@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Object getMoviebyId(int movieId) {
+	public Movie getMoviebyId(int movieId) {
 
 		return movieMapper.getMoviebyId(movieId);
 	}
@@ -43,6 +44,12 @@ public class MovieServiceImpl implements MovieService {
 	public void updateMovie(Movie movie) {
 		movieMapper.updateMovie(movie);
 
+	}
+
+	@Override
+	public List<Movie> filterMovielist(Date fromDate,Date toDate) {
+		
+		return movieMapper.filterMovielist(fromDate,toDate);
 	}
 
 }

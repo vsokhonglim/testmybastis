@@ -1,10 +1,10 @@
 package com.springmvc.dao;
 
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
-
-import javax.transaction.Transactional;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -60,5 +60,22 @@ public class MovieMapper {
 		session.commit();
 		session.close();
 		
+	}
+
+
+	
+
+
+	public List<Movie> filterMovielist(Date fromDate,Date toDate) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		 Map<String, Date> filterDate = new HashMap<String, Date>();
+
+		 filterDate.put("fromdate", fromDate);
+		 filterDate.put("todate", toDate);
+		
+		List<Movie> movieList = session.selectList("filterMovielist",filterDate);
+		session.commit();
+		session.close();
+		return movieList;
 	}
 }

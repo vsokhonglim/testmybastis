@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +15,9 @@ public interface MovieService {
 
 	public void deleteMovie(int movieId);
 
-	public Object getMoviebyId(int movieId);
+	public Movie getMoviebyId(int movieId);
 
 	public void updateMovie(Movie movie);
+
+	public List<Movie> filterMovielist(Date fromDate,Date toDate);
 }

@@ -17,29 +17,29 @@ table, th, td {
 	
 }
 
-td:nth-child(1) {
-	width: 25%;
+th:nth-child(1) {
+	width: 20%;
 	
 }
 
-td:nth-child(2) {
+th:nth-child(2) {
 	width: 50%;
 	
 }
 
-td:nth-child(3) {
-	width: 1fr;
+th:nth-child(3) {
+	width: 10%;
 	
 }
 
-td:nth-child(4) {
-	width: 25%;
+th:nth-child(4) {
+	width: 20%;
 	
 }
-
-.datepicker,
-.table-condensed {
-  width: 200px;
-  height:200px;
-  
+.date-filter-container{
+	display:flex;
+	justify-content: center;
+	gap:15px;
+	margin-bottom: 10px;
 }
+

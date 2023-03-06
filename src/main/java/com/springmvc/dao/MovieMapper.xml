@@ -40,5 +40,11 @@
 		movie_releasedate = #{releasedate}
 		WHERE movie_id = #{id}
 	</update>
+	
+	<select id="filterMovielist" resultType="movies" resultMap="movielist" parameterType="Map"
+		>
+		
+		SELECT * FROM movie WHERE movie_releasedate between #{fromdate} and #{todate} 
+	</select>
 
 </mapper>
