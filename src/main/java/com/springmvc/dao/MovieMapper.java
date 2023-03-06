@@ -43,4 +43,22 @@ public class MovieMapper {
 		session.commit();
 		session.close();
 	}
+
+
+	public Movie getMoviebyId(int movieId) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		Movie movieList = (Movie)session.selectOne("getMoviebyId",movieId);
+		session.commit();
+		session.close();
+		return movieList;
+	}
+
+
+	public void updateMovie(Movie movie) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		session.update("updatemovie", movie);
+		session.commit();
+		session.close();
+		
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,30 +18,45 @@ import com.springmvc.service.MovieService;
 public class MoviesController {
 	@Autowired
 	private MovieService movieService;
+
 	@RequestMapping("/")
 	public String getMovielist(Model model) {
-		model.addAttribute("Movielist",movieService.getListMovie());
+		model.addAttribute("Movielist", movieService.getListMovie());
 		return "movie";
-		
+
 	}
-	
+
 	@GetMapping("/addmovie")
 	public String addMovie(Model model) {
 		Movie newMovie = new Movie();
-		model.addAttribute("newmovie",newMovie);
+		model.addAttribute("newmovie", newMovie);
 		return "addmovie";
 	}
-	
-	@PostMapping("/addNewMovie")
+
+	@RequestMapping("/addNewMovie")
 	public String addNewMovie(@ModelAttribute("newmovie") Movie movie) {
-		movieService.addMovie(movie);
+		
+		if (movie.getId() == 0) {
+			movieService.addMovie(movie);
+		} else {
+			movieService.updateMovie(movie);
+		}
+
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/deletemovie")
-	public String deleteEmployee(@RequestParam("movieid") int movieId){
-		
+	public String deleteEmployee(@RequestParam("movieid") int movieId) {
+
 		movieService.deleteMovie(movieId);
 		return "redirect:/";
 	}
+
+	@RequestMapping("/updatemovie")
+	public String updateMovie(@RequestParam("movieid") int movieId, Model model) {
+
+		model.addAttribute("newmovie", movieService.getMoviebyId(movieId));
+		return "addmovie";
+	}
+
 }

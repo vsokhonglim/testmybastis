@@ -13,4 +13,8 @@ public interface MovieService {
 	public void addMovie(Movie movie);
 
 	public void deleteMovie(int movieId);
+
+	public Object getMoviebyId(int movieId);
+
+	public void updateMovie(Movie movie);
 }

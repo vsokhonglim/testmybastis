@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
   
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 	
 		<form:form action="addNewMovie" modelAttribute="newmovie" method="POST">
 		
+		<form:hidden path="id" />
 			<table>
 				<tbody>
 					<tr>

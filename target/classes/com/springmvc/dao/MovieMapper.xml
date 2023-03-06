@@ -17,15 +17,28 @@
 		resultMap="movielist">
 		SELECT * FROM movie
 	</select>
+	<select id="getMoviebyId" resultType="movies"
+		parameterType="int" resultMap="movielist">
+		SELECT * FROM movie WHERE movie_id =
+		#{movieId}
+	</select>
 
 	<insert id="addmovie" parameterType="movies" keyProperty="id"
 		useGeneratedKeys="true">
-		INSERT INTO movie(movie_title, movie_description, movie_releasedate)
+		INSERT INTO movie(movie_title, movie_description,
+		movie_releasedate)
 		VALUES(#{title}, #{description}, #{releasedate})
 	</insert>
-	
+
 	<delete id="deletemovie" parameterType="int">
+
 		DELETE FROM movie WHERE movie_id = #{movieId}
 	</delete>
+	<update id="updatemovie" parameterType="movies">
+		UPDATE movie SET
+		movie_title = #{title}, movie_description = #{description},
+		movie_releasedate = #{releasedate}
+		WHERE movie_id = #{id}
+	</update>
 
 </mapper>
