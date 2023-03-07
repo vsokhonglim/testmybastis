@@ -17,15 +17,24 @@ public class MovieMapper {
 
 	
 	
-	public List<Movie> getListMovie(){
+	/*
+	 * public List<Movie> getListMovie(){ SqlSession session =
+	 * MyBatisUtil.getSqlSessionFactory().openSession(); List<Movie> movieList =
+	 * session.selectList("getListMovie"); session.commit(); session.close(); return
+	 * movieList;
+	 * 
+	 * }
+	 */
+	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate) {
+		int offSet = (pageNum-1) *10;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		List<Movie> movieList = session.selectList("getListMovie");
-		session.commit();
-		session.close();
+		Map filterMap = new HashMap();
+		filterMap.put("offset", offSet);
+		filterMap.put("fromdate", fromDate);
+		filterMap.put("todate", toDate);
+		List<Movie> movieList = session.selectList("getListMovie",filterMap);
 		return movieList;
-		
 	}
-
 	
 	public void addMovie(Movie movie){
 		
@@ -78,4 +87,20 @@ public class MovieMapper {
 		session.close();
 		return movieList;
 	}
+
+
+	public int getRowcount(String tblName,Date fromDate,Date toDate) {
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		Map filterMap = new HashMap();
+		filterMap.put("fromdate", fromDate);
+		filterMap.put("todate", toDate);
+		filterMap.put("tblName", tblName);
+		int rowCount = session.selectOne("getRowcount", filterMap);
+		session.commit();
+		session.close();
+		return rowCount;
+	}
+
+
+	
 }

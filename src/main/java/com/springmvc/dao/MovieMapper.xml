@@ -13,9 +13,11 @@
 
 	</resultMap>
 
-	<select id="getListMovie" resultType="movies"
+	<select id="getListMovie" resultType="movies" parameterType="Map"
 		resultMap="movielist">
-		SELECT * FROM movie LIMIT 10 OFFSET 0
+		SELECT * FROM movie
+		WHERE movie_releasedate between #{fromdate} and #{todate} 
+		LIMIT 10 OFFSET #{offset} 
 	</select>
 	<select id="getMoviebyId" resultType="movies"
 		parameterType="int" resultMap="movielist">
@@ -42,9 +44,13 @@
 	</update>
 	
 	<select id="filterMovielist" resultType="movies" resultMap="movielist" parameterType="Map"
-		>
-		
+		>		
 		SELECT * FROM movie WHERE movie_releasedate between #{fromdate} and #{todate} 
+	</select>
+	
+	<select id="getRowcount" resultType="int" parameterType="Map">
+		SELECT COUNT(*) FROM ${tblName} 
+		WHERE movie_releasedate between #{fromdate} and #{todate};
 	</select>
 
 </mapper>

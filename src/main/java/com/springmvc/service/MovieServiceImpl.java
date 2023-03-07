@@ -15,10 +15,15 @@ public class MovieServiceImpl implements MovieService {
 	@Autowired
 	private MovieMapper movieMapper;
 
+	/*
+	 * @Override public List<Movie> getListMovie() {
+	 * 
+	 * return movieMapper.getListMovie(); }
+	 */
 	@Override
-	public List<Movie> getListMovie() {
-
-		return movieMapper.getListMovie();
+	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate) {
+		
+		return movieMapper.getListMovie(pageNum,fromDate,toDate);
 	}
 
 	@Override
@@ -51,5 +56,13 @@ public class MovieServiceImpl implements MovieService {
 		
 		return movieMapper.filterMovielist(fromDate,toDate);
 	}
+
+	@Override
+	public int getRowcount(String string,Date fromDate,Date toDate) {
+		
+		return movieMapper.getRowcount(string,fromDate,toDate);
+	}
+
+	
 
 }

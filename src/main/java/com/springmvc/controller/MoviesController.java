@@ -23,9 +23,21 @@ public class MoviesController {
 	@Autowired
 	private MovieService movieService;
 
+	/*
+	 * @RequestMapping("/") public String getMovielist(Model model) {
+	 * model.addAttribute("Movielist", movieService.getListMovie());
+	 * model.addAttribute("rowcount",movieService.getRowcount("movie")); return
+	 * "movie";
+	 * 
+	 * }
+	 */
 	@RequestMapping("/")
-	public String getMovielist(Model model) {
-		model.addAttribute("Movielist", movieService.getListMovie());
+	public String getMovielist(Model model,
+								@RequestParam(value = "page", defaultValue = "1", required = false) int pageNum,
+								@RequestParam(value="fromdate",defaultValue = "1900-01-01")@DateTimeFormat(pattern = "yyyy-MM-dd")Date fromDate,
+								@RequestParam(value="todate",defaultValue = "2100-01-01")@DateTimeFormat(pattern = "yyyy-MM-dd")Date toDate) {
+		model.addAttribute("Movielist", movieService.getListMovie(pageNum,fromDate,toDate));
+		model.addAttribute("rowcount",movieService.getRowcount("movie",fromDate,toDate));
 		return "movie";
 
 	}
@@ -67,6 +79,7 @@ public class MoviesController {
 	public String filterMovielist(@RequestParam(value="fromdate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date fromDate, @RequestParam(value="todate")@DateTimeFormat(pattern = "yyyy-MM-dd")Date toDate,Model model) {
 		
 		model.addAttribute("Movielist", movieService.filterMovielist(fromDate,toDate));
+	
 		return "movie";
 
 	}
