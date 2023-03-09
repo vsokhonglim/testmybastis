@@ -108,7 +108,10 @@
 					<c:param name="todate" value="${param.todate}" />
 					<c:param name="page" value="${loop.count}"/>
 					</c:url>
-			<a href="${pageNumcompleteURL}">${loop.count}</a>
+			
+			<a href="${pageNumcompleteURL}" <c:if test="${param.page ==loop.count}">
+			 class="active"
+			</c:if>>${loop.count}</a>
 			
 		
 			</c:forEach>

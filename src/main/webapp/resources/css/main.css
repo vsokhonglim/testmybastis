@@ -65,7 +65,7 @@ th:nth-child(4) {
 }
 
 .pagination a.active {
-  background-color: #676767;
+  background-color: #6f6a6a;
   color: white;
   border: 1px solid #676767;
 }
