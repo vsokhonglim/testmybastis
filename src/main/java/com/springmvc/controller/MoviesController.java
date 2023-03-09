@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.model.Genre;
 import com.springmvc.model.Movie;
+import com.springmvc.service.GenreService;
 import com.springmvc.service.MovieService;
 
 @Controller
 public class MoviesController {
 	@Autowired
 	private MovieService movieService;
+	
+	@Autowired
+	private GenreService genreService;
 
 	/*
 	 * @RequestMapping("/") public String getMovielist(Model model) {
@@ -48,7 +53,11 @@ public class MoviesController {
 	@GetMapping("/addmovie")
 	public String addMovie(Model model) {
 		Movie newMovie = new Movie();
+		Genre genre = new Genre();
 		model.addAttribute("newmovie", newMovie);
+		model.addAttribute("genreList",genreService.getGenreList());
+		model.addAttribute("genre",genre);
+		System.out.println(genreService.getGenreList().toString());
 		return "addmovie";
 	}
 
@@ -60,7 +69,7 @@ public class MoviesController {
 		} else {
 			movieService.updateMovie(movie);
 		}
-
+		
 		return "redirect:/";
 	}
 

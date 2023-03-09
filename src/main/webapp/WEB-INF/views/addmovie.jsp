@@ -3,6 +3,7 @@
   
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="s"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,12 +47,24 @@
 		
 		
 		</form:form>
+		
 	
 		<div style="clear; both;"></div>
 		
 		<p>
 			<a href="${pageContext.request.contextPath}/">Back to List</a>
 		</p>
+		
+		<form:form modelAttribute="genre">
+		<form:select path="Id">
+		<c:forEach items="${genreList}" var="e">
+		<form:option value="${e.id}">${e.genre}</form:option>
+    
+    	</c:forEach>
+		</form:select>
+		</form:form>
+		
+		
 	
 	</div>
 
