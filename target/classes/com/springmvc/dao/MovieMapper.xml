@@ -17,6 +17,9 @@
 		resultMap="movielist">
 		SELECT * FROM movie
 		WHERE movie_releasedate between #{fromdate} and #{todate} 
+		<if test="search != null">
+    	AND movie_title LIKE #{search} || movie_description LIKE #{search}
+  		</if>
 		LIMIT 10 OFFSET #{offset} 
 	</select>
 	<select id="getMoviebyId" resultType="movies"
@@ -50,7 +53,10 @@
 	
 	<select id="getRowcount" resultType="int" parameterType="Map">
 		SELECT COUNT(*) FROM ${tblName} 
-		WHERE movie_releasedate between #{fromdate} and #{todate};
+		WHERE movie_releasedate between #{fromdate} and #{todate}
+		<if test="search != null">
+    	AND movie_title LIKE #{search} || movie_description LIKE #{search}
+  		</if>;
 	</select>
 
 </mapper>

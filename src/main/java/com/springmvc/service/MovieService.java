@@ -10,7 +10,7 @@ import com.springmvc.model.Movie;
 @Service
 public interface MovieService {
 	/* public List<Movie> getListMovie(); */
-	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate);
+	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate,String Search);
 
 	public void addMovie(Movie movie);
 
@@ -22,5 +22,5 @@ public interface MovieService {
 
 	public List<Movie> filterMovielist(Date fromDate,Date toDate);
 
-	public int getRowcount(String string,Date fromDate,Date toDate);
+	public int getRowcount(String string,Date fromDate,Date toDate,String Search);
 }

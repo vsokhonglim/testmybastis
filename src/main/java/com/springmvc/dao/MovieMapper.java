@@ -25,13 +25,24 @@ public class MovieMapper {
 	 * 
 	 * }
 	 */
-	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate) {
+	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate,String Search) {
 		int offSet = (pageNum-1) *10;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		String str = Search;
+        String[] arrOfStr = str.split(" ");
+        StringBuilder sb1 = new 
+                StringBuilder("");
+  
+        for (String a : arrOfStr) {
+        	sb1.append("%"+a);
+            
+        }
+        
 		Map filterMap = new HashMap();
 		filterMap.put("offset", offSet);
 		filterMap.put("fromdate", fromDate);
 		filterMap.put("todate", toDate);
+		filterMap.put("search", sb1.toString()+"%");
 		List<Movie> movieList = session.selectList("getListMovie",filterMap);
 		return movieList;
 	}
@@ -89,12 +100,23 @@ public class MovieMapper {
 	}
 
 
-	public int getRowcount(String tblName,Date fromDate,Date toDate) {
+	public int getRowcount(String tblName,Date fromDate,Date toDate,String Search) {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		String str = Search;
+        String[] arrOfStr = str.split(" ");
+        StringBuilder sb1 = new 
+                StringBuilder("");
+  
+        for (String a : arrOfStr) {
+        	sb1.append("%"+a);
+            
+        }
+        
 		Map filterMap = new HashMap();
 		filterMap.put("fromdate", fromDate);
 		filterMap.put("todate", toDate);
 		filterMap.put("tblName", tblName);
+		filterMap.put("search", sb1.toString()+"%");
 		int rowCount = session.selectOne("getRowcount", filterMap);
 		session.commit();
 		session.close();

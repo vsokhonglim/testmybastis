@@ -21,9 +21,9 @@ public class MovieServiceImpl implements MovieService {
 	 * return movieMapper.getListMovie(); }
 	 */
 	@Override
-	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate) {
+	public List<Movie> getListMovie(int pageNum,Date fromDate,Date toDate,String Search) {
 		
-		return movieMapper.getListMovie(pageNum,fromDate,toDate);
+		return movieMapper.getListMovie(pageNum,fromDate,toDate,Search);
 	}
 
 	@Override
@@ -58,9 +58,9 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public int getRowcount(String string,Date fromDate,Date toDate) {
+	public int getRowcount(String string,Date fromDate,Date toDate,String Search) {
 		
-		return movieMapper.getRowcount(string,fromDate,toDate);
+		return movieMapper.getRowcount(string,fromDate,toDate,Search);
 	}
 
 	

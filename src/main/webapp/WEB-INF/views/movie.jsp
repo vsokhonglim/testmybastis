@@ -27,21 +27,27 @@
 		<input type="button" value="Add movie"
 			onclick="window.location.href='addmovie'; return false;" />
 			
-			<div class="search-container">
-			<input type="text" placeholder=""/>
 			
-			</div>
 			
 			<form action="" method="GET">			
 			<div class="date-filter-container">
-			
+			<c:if test="${empty param.search}">
+			<input type="text" placeholder="movies title or description" class="search-bar"
+					name="search"
+					value=""/>
+			</c:if>
+			<c:if test="${not empty param.search}">
+			<input type="text" placeholder="movies title or description" class="search-bar"
+					name="search"
+					value="<%=request.getParameter("search")%>"/>
+			</c:if>
 			<span>From:</span>
-			 <input type="date" name="fromdate" required="required"
+			 <input type="date" name="fromdate" 
 					value="<%=request.getParameter("fromdate")%>" />
 			<span>to:</span> 
-			<input type="date" name="todate" required="required"
+			<input type="date" name="todate" 
 					value="<%=request.getParameter("todate")%>" />
-			<input	type="submit" value="Filter" />
+			<input	type="submit" value="submit" />
 			
 			</div>
 			
@@ -94,6 +100,7 @@
 	 		
 			  <c:if test="${param.page>1}">
 			  <c:url value="/" var="completeURL">
+			  		<c:param name="search" value="${param.search}" />
 					<c:param name="fromdate" value="${param.fromdate}" />
 					<c:param name="todate" value="${param.todate}" />
 					<c:param name="page" value="${param.page-1}"/>
@@ -104,6 +111,7 @@
 			
 			<c:forEach begin="1" end="${rowcount}" varStatus="loop" step="10" var="index">
 			<c:url value="/" var="pageNumcompleteURL">
+					<c:param name="search" value="${param.search}" />
 					<c:param name="fromdate" value="${param.fromdate}" />
 					<c:param name="todate" value="${param.todate}" />
 					<c:param name="page" value="${loop.count}"/>
@@ -120,8 +128,9 @@
 		
 			</c:forEach>
 			
-			<c:if test="${param.page==0 ||param.page==null }">
+			<c:if test="${(param.page==0 ||param.page==null)&&(rowcount>10) }">
 			  	<c:url value="/" var="completeURL">
+			  		<c:param name="search" value="${param.search}" />
 					<c:param name="fromdate" value="${param.fromdate}" />
 					<c:param name="todate" value="${param.todate}" />
 					<c:param name="page" value="${2}"/>
@@ -131,6 +140,7 @@
 			
 			  <c:if test="${param.page<(rowcount/10)&&!(param.page==0)}">
 			  	<c:url value="/" var="completeURL">
+			  		<c:param name="search" value="${param.search}" />
 					<c:param name="fromdate" value="${param.fromdate}" />
 					<c:param name="todate" value="${param.todate}" />
 					<c:param name="page" value="${param.page+1}"/>
