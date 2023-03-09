@@ -19,5 +19,7 @@
   </environments>
   <mappers>
     <mapper resource="com/springmvc/dao/MovieMapper.xml" />
+    <mapper resource="com/springmvc/dao/GenreMapper.xml" />
+    
   </mappers>
 </configuration> 

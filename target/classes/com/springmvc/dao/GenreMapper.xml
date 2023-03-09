@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.springmvc.dao.GenreMapper">
+  
+  <resultMap type="com.springmvc.model.Genre" id="genrelist">
+		<id property="id" column="genre_id"></id>
+		<result property="genre" column="genre" />
+	</resultMap>
+	
+	
+  <select id="getGenreList" resultMap="genrelist">
+  	SELECT * FROM genre
+  </select>
+  
+  </mapper>
