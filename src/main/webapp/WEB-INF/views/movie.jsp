@@ -111,7 +111,11 @@
 			
 			<a href="${pageNumcompleteURL}" <c:if test="${param.page ==loop.count}">
 			 class="active"
-			</c:if>>${loop.count}</a>
+			</c:if>
+			<c:if test="${((param.page ==null)||(param.page ==0))&&(loop.count==1)}">
+			 class="active"
+			</c:if>
+			>${loop.count}</a>
 			
 		
 			</c:forEach>
