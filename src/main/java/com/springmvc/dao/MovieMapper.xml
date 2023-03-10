@@ -5,13 +5,23 @@
 
 <mapper namespace="com.springmvc.dao.MovieMapper">
 
+
+	<resultMap type="com.springmvc.model.Genre" id="genre">
+		<id property="id" column="genre_id"></id>
+		<result property="genre" column="genre" />
+	</resultMap>
 	<resultMap type="movies" id="movielist">
 		<id property="id" column="movie_id"></id>
 		<result property="title" column="movie_title" />
 		<result property="description" column="movie_description" />
 		<result property="releasedate" column="movie_releasedate" />
+		<collection property="movieGenre" ofType="genre" resultMap="genre">
+		<id property="id" column="genre_id"></id>
+		<result property="genre" column="genre" />
+		</collection>
 
 	</resultMap>
+
 
 	<select id="getListMovie" resultType="movies" parameterType="Map"
 		resultMap="movielist">
@@ -21,11 +31,16 @@
     	AND movie_title LIKE #{search} || movie_description LIKE #{search}
   		</if>
 		LIMIT 10 OFFSET #{offset} 
+		
 	</select>
 	<select id="getMoviebyId" resultType="movies"
 		parameterType="int" resultMap="movielist">
-		SELECT * FROM movie WHERE movie_id =
-		#{movieId}
+	SELECT * FROM movie
+	left join movie_genre
+	On movie.movie_id = movie_genre.movie_id
+	left join genre
+	on movie_genre.genre_id = genre.genre_id
+	WHERE movie.movie_id = #{movieId}
 	</select>
 
 	<insert id="addmovie" parameterType="movies" keyProperty="id"

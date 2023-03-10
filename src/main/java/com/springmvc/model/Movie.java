@@ -1,6 +1,7 @@
 package com.springmvc.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,14 @@ public class Movie {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releasedate;
 	
+	private List<Genre> movieGenre;
+	
+	public List<Genre> getGenre() {
+		return movieGenre;
+	}
+	public void setGenre(List<Genre> genre) {
+		this.movieGenre = genre;
+	}
 	public String getTitle() {
 		return title;
 	}

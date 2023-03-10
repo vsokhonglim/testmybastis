@@ -1,6 +1,7 @@
 package com.springmvc.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,10 +55,11 @@ public class MoviesController {
 	public String addMovie(Model model) {
 		Movie newMovie = new Movie();
 		Genre genre = new Genre();
+		model.addAttribute("Genre",genre);
 		model.addAttribute("newmovie", newMovie);
 		model.addAttribute("genreList",genreService.getGenreList());
-		model.addAttribute("genre",genre);
-		System.out.println(genreService.getGenreList().toString());
+		
+		 
 		return "addmovie";
 	}
 
@@ -67,7 +69,8 @@ public class MoviesController {
 		if (movie.getId() == 0) {
 			movieService.addMovie(movie);
 		} else {
-			movieService.updateMovie(movie);
+			System.out.println("hi");
+			 movieService.updateMovie(movie); 
 		}
 		
 		return "redirect:/";
@@ -82,8 +85,13 @@ public class MoviesController {
 
 	@RequestMapping("/updatemovie")
 	public String updateMovie(@RequestParam("movieid") int movieId, Model model) {
-
-		model.addAttribute("newmovie", movieService.getMoviebyId(movieId));
+		Genre genre = new Genre();
+		Movie movie = movieService.getMoviebyId(movieId);
+		
+		
+		model.addAttribute("Genre",genre);
+		model.addAttribute("genreList",genreService.getGenreList());
+		model.addAttribute("newmovie", movie);
 		return "addmovie";
 	}
 	
